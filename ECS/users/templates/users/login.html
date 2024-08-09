@@ -1,0 +1,12 @@
+<div class="container">
+    <div class="form-container">
+        <form method="post" class="form">
+            {% csrf_token %}
+            <h2 class="form-title">Login</h2>
+            {{ form.as_p }}
+            <button type="submit" class="form-btn">Login</button>
+            <a href="{% url 'users:signup' %}"> Signup</a>
+        </form>
+        
+    </div>
+</div>
