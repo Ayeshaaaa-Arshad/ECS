@@ -6,7 +6,8 @@ from core import views
 app_name = 'core'
 
 urlpatterns = [
-    path('',views.IndexPageView.as_view(),name='index')
+    path('',views.IndexPageView.as_view(),name='index'),
+    path('testingQueries',views.testingQueries,name='test_queries'),
 ]
 
 if settings.DEBUG:
