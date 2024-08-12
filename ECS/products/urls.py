@@ -6,7 +6,6 @@ from products import views
 app_name = 'products'
 
 urlpatterns = [
-
 ]
 
 if settings.DEBUG:

@@ -1,29 +1,39 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
-from users.constants import ROLES
 
 # Custom User model inheriting from AbstractUser
 class User(AbstractUser):
     phone_number = models.CharField(max_length=11, blank=True, null=True)
     address = models.CharField(max_length=255, blank=True, null=True)
-    role = models.CharField(max_length=10, choices=ROLES, default='Customer')
 
     def __str__(self):
-        return f'{self.first_name} {self.last_name} ({self.role})'
+        return f'{self.first_name} {self.last_name}'
     
 
-    groups = models.ManyToManyField(
-        'auth.Group',
-        related_name='custom_user_set',
-        blank=True,
-        help_text='The groups this user belongs to.',
-        verbose_name='groups'
-    )
+class Customer(models.Model):
+    user = models.OneToOneField(User,related_name='customer_profile',on_delete=models.CASCADE)
 
-    user_permissions = models.ManyToManyField(
-        'auth.Permission',
-        related_name='custom_user_set',
-        blank=True,
-        help_text='Specific permissions for this user.',
-        verbose_name='user permissions'
-    )
+    class Meta:
+        verbose_name = 'Customer'
+
+    def __str__(self):
+        return f'{self.user.first_name} {self.user.last_name}'
+
+class AppAdmin(models.Model):
+    user = models.OneToOneField(User,related_name='app_admin_profile',on_delete=models.CASCADE)
+
+    class Meta:
+        verbose_name = 'AppAdmin'
+
+    def __str__(self):
+        return f'{self.user.first_name} {self.user.last_name}'
+    
+class ShopAdmin(models.Model):
+    user = models.OneToOneField(User,related_name='shop_admin_profile',on_delete=models.CASCADE)
+
+    class Meta:
+        verbose_name = 'ShopAdmin'
+
+    def __str__(self):
+        return f'{self.user.first_name} {self.user.last_name}'
+    

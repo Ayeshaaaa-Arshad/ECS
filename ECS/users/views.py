@@ -1,5 +1,5 @@
 from django.http import HttpResponse
-from django.shortcuts import redirect
+from django.shortcuts import redirect,render
 from django.contrib.auth import login, authenticate, logout
 from django.core.exceptions import ValidationError
 from django.urls import reverse_lazy
@@ -27,16 +27,20 @@ class LoginView(FormView):
     form_class = LoginForm
     success_url = reverse_lazy('core:index')
 
-    def post(self, request, *args, **kwargs):
-        form = self.get_form()
-        if form.is_valid():
-            return self.form_valid(form)
+    def form_valid(self, form):
+        username = form.cleaned_data.get('username')
+        password = form.cleaned_data.get('password')
+        user = authenticate(self.request, username=username, password=password)
+
+        if user is not None:
+            login(self.request, user) 
+            return super().form_valid(form)  
+
         else:
             return self.form_invalid(form)
 
 
-    
 #Log out user
 def logout_user(request):
     logout(request)
-    return redirect('users:login')  
+    return redirect('users:login')

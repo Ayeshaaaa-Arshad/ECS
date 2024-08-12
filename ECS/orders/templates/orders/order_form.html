@@ -1,0 +1,82 @@
+<!-- templates/order_form.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create/Update Order</title>
+</head>
+<body>
+    <h1>Create/Update Order</h1>
+    <form method="post" action="{% url 'orders:create_order' %}">
+        {% csrf_token %}
+
+        <h2>Customer Details</h2>
+        <label for="customer_user">User ID:</label>
+        <input type="number" name="customer_user" id="customer_user" required><br><br>
+
+        <label for="customer_first_name">First Name:</label>
+        <input type="text" name="customer_first_name" id="customer_first_name" required><br><br>
+
+        <label for="customer_last_name">Last Name:</label>
+        <input type="text" name="customer_last_name" id="customer_last_name" required><br><br>
+
+        <label for="customer_username">Username:</label>
+        <input type="text" name="customer_username" id="customer_username" required><br><br>
+
+        <label for="customer_email">Email:</label>
+        <input type="email" name="customer_email" id="customer_email" required><br><br>
+
+        <label for="customer_phone_number">Phone Number:</label>
+        <input type="text" name="customer_phone_number" id="customer_phone_number"><br><br>
+
+        <label for="customer_address">Address:</label>
+        <input type="text" name="customer_address" id="customer_address"><br><br>
+
+       <h2>Shop Details</h2>
+        <label for="shop_id">Shop ID:</label>
+        <input type="number" name="shop_id" id="shop_id"><br><br>
+
+        <label for="shop_name">Shop Name:</label>
+        <input type="text" name="shop_name" id="shop_name" required><br><br>
+
+        <label for="shop_address">Shop Address:</label>
+        <input type="text" name="shop_address" id="shop_address" required><br><br>
+
+        <h2>Product Details</h2>
+        <label for="product_id">Product ID:</label>
+        <input type="number" name="product_id" id="product_id"><br><br>
+
+        <label for="product_name">Product Name:</label>
+        <input type="text" name="product_name" id="product_name" required><br><br>
+
+        <label for="product_price">Product Price:</label>
+        <input type="number" step="0.01" name="product_price" id="product_price" required><br><br>
+
+        <h2>Add to Cart Details</h2>
+        <label for="cart_customer">Customer ID:</label>
+        <input type="number" name="cart_customer" id="cart_customer" required><br><br>
+
+        <label for="cart_product">Product ID:</label>
+        <input type="number" name="cart_product" id="cart_product" required><br><br>
+
+        <label for="cart_quantity">Quantity:</label>
+        <input type="number" name="cart_quantity" id="cart_quantity" required><br><br>
+
+        <h2>Order Item Details</h2>
+        <label for="order_item_order">Order ID:</label>
+        <input type="number" name="order_item_order" id="order_item_order" required><br><br>
+
+        <label for="order_item_cart">Cart Item ID:</label>
+        <input type="number" name="order_item_cart" id="order_item_cart" required><br><br>
+
+        <label for="order_item_quantity">Quantity:</label>
+        <input type="number" name="order_item_quantity" id="order_item_quantity" required><br><br>
+
+        <label for="order_date">Order Date:</label>
+        <input type="datetime-local" name="order_date" id="order_date"><br><br>
+
+        <button type="submit">Save Order</button>
+    </form>
+</body>
+</html>
