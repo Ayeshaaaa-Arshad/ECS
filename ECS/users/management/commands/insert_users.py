@@ -40,7 +40,7 @@ class Command(BaseCommand):
         # Process Customer sheet
         customer_sheet = workbook['Customers']
         for row in customer_sheet.iter_rows(min_row=2, values_only=True):
-            user_id, first_name, last_name, username, email, phone_number, address, group_name = row
+            user_id, first_name, last_name, username, email, phone_number, address, group_name, password = row
 
             phone_number = str(phone_number).strip()
 
@@ -62,6 +62,7 @@ class Command(BaseCommand):
                         phone_number=phone_number,
                         address=address
                     )
+                    user.set_password(password)
                     user.save()
                     user.groups.add(customer_group)
                     customers_to_create.append(Customer(user=user))
@@ -77,6 +78,7 @@ class Command(BaseCommand):
                             'address': address
                         }
                     )
+                    user.set_password(password)
                     user.groups.add(customer_group)
                     if created:
                         customers_to_create.append(Customer(user=user))
@@ -89,7 +91,7 @@ class Command(BaseCommand):
         # Process AppAdmin sheet
         app_admin_sheet = workbook['AppAdmins']
         for row in app_admin_sheet.iter_rows(min_row=2, values_only=True):
-            user_id, first_name, last_name, username, email, phone_number, address, group_name = row
+            user_id, first_name, last_name, username, email, phone_number, address, group_name,password = row
 
             phone_number = str(phone_number).strip()
 
@@ -111,6 +113,7 @@ class Command(BaseCommand):
                         phone_number=phone_number,
                         address=address
                     )
+                    user.set_password(password)
                     user.save()
                     user.groups.add(app_admin_group)
                     app_admins_to_create.append(AppAdmin(user=user))
@@ -126,6 +129,7 @@ class Command(BaseCommand):
                             'address': address
                         }
                     )
+                    user.set_password(password)
 
                     user.groups.add(app_admin_group)
                     if created:
@@ -139,7 +143,7 @@ class Command(BaseCommand):
         # Process ShopAdmin sheet
         shop_admin_sheet = workbook['ShopAdmins']
         for row in shop_admin_sheet.iter_rows(min_row=2, values_only=True):
-            user_id, first_name, last_name, username, email, phone_number, address, group_name = row
+            user_id, first_name, last_name, username, email, phone_number, address, group_name,password = row
 
             phone_number = str(phone_number).strip()
 
@@ -161,6 +165,7 @@ class Command(BaseCommand):
                         phone_number=phone_number,
                         address=address
                     )
+                    user.set_password(password)
                     user.save()
                     user.groups.add(shop_admin_group)
                     shop_admins_to_create.append(ShopAdmin(user=user))
@@ -176,6 +181,8 @@ class Command(BaseCommand):
                             'address': address
                         }
                     )
+                    user.set_password(password)
+                    print(user.set_password(password))
                     user.groups.add(shop_admin_group)
                     if created:
                         shop_admins_to_create.append(ShopAdmin(user=user))
